@@ -2,20 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 #region Book CRUD
-Route::get('/', 'HomeController@index')
-    ->name('index');
 
 Route::get('/book/create', 'HomeController@create')
     ->name('book.create');
@@ -58,3 +45,11 @@ Route::delete('/music/delete/{music}', 'MusicController@delete')
 Route::get('/music/{music}', 'MusicController@details')
     ->name('music.details');
 #endregion
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')
+    ->name('home')
+    ->middleware('auth');
+
+Route::resource('posts', 'PostController');
